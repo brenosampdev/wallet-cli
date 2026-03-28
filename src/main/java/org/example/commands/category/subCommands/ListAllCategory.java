@@ -5,7 +5,7 @@ import org.example.core.interfaces.Command;
 
 import java.util.List;
 
-public class ListAll implements Command {
+public class ListAllCategory implements Command {
     // TODO Make listAll subcommand
     public String name() {
         return "listAll";
@@ -35,9 +35,9 @@ public class ListAll implements Command {
             System.out.println("No categories found.");
         }
 
-        System.out.println("Categories:");
+        System.out.println("Categories:\n");
         for (String category : categories) {
-            System.out.println(category);
+            System.out.println(category + "\n");
         }
     }
 }

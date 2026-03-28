@@ -1,7 +1,7 @@
 package org.example.commands.category;
 
 import org.example.commands.category.subCommands.AddCategory;
-import org.example.commands.category.subCommands.ListAll;
+import org.example.commands.category.subCommands.ListAllCategory;
 import org.example.core.CommandContext;
 import org.example.core.interfaces.Command;
 
@@ -12,7 +12,8 @@ public class Category implements Command {
 
     public  Category() {
         this.subs = Map.of(
-                "add", new AddCategory()
+                "add", new AddCategory(),
+                "listAll", new ListAllCategory()
         );
     }
 
@@ -25,10 +26,18 @@ public class Category implements Command {
     }
 
     public String info() {
-        return "category";
+        return """
+                Category command
+                Subcommands:
+                - add: Add a new category
+                - rm: Remove a category
+                - update: Update a category
+                - listByName: List categories by name
+                - listAll: List all categories
+                """;
     }
 
     public void execute(CommandContext context) {
-        System.out.println("category" + "-" + "args: " + context.get("category"));
+        System.out.println(info());
     }
 }
