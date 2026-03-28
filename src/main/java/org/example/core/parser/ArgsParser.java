@@ -16,7 +16,7 @@ public class ArgsParser {
                 String arg = args[i];
 
                 if(!arg.startsWith("--")){
-                  throw new CommandNotFoundException("teste");
+                  throw new CommandNotFoundException("Unknow command: " + arg);
                 }
 
 
@@ -33,3 +33,6 @@ public class ArgsParser {
             return new CommandContext(map);
         }
 }
+
+
+
