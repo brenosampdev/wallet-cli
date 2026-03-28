@@ -18,6 +18,11 @@ public class Help implements Command {
     }
 
     @Override
+    public void specArgs(CommandContext context) {
+
+    }
+
+    @Override
     public void execute(CommandContext context) {
         StringBuilder helpText = new StringBuilder();
 
