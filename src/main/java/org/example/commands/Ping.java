@@ -16,6 +16,11 @@ public class Ping implements Command {
     }
 
     @Override
+    public void specArgs(CommandContext context) {
+
+    }
+
+    @Override
     public void execute(CommandContext context) {
         System.out.println("ping in world");
     }

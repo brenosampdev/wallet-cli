@@ -19,6 +19,7 @@ public interface Command {
         return "no documentation command";
     }
 
+    void specArgs(CommandContext context);
 
     void execute(CommandContext context);
 }
