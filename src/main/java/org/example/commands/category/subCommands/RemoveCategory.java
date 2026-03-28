@@ -6,11 +6,14 @@ import org.example.core.interfaces.Command;
 public class Remove implements Command {
     // TODO Make remove subcommmand
     public String name() {
-        return "";
+        return "rm";
     }
 
     public String info() {
-        return "";
+        return """
+                Remove a category:
+                Ex: wallet category rm --name="Category 1"
+                """;
     }
 
     public void execute(CommandContext context) {
