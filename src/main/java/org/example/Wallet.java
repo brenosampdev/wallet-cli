@@ -2,6 +2,7 @@ package org.example;
 
 
 import org.example.commands.Hello;
+import org.example.commands.category.Category;
 import org.example.core.CommandContext;
 import org.example.core.CommandRegistry;
 import org.example.core.CommandResolver;
@@ -26,6 +27,7 @@ public class Wallet {
         CommandResolver resolver = new CommandResolver();
 
         registry.register(new Hello());
+        registry.register(new Category());
 
         Command command = registry.get(commandName);
 
