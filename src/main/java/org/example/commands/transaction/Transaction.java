@@ -1,4 +1,4 @@
-package org.example.commands.goal;
+package org.example.commands.transaction;
 
 public class Transaction {
 }
