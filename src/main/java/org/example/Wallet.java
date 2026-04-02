@@ -1,15 +1,15 @@
 package org.example;
 
 
-import org.example.commands.Hello;
-import org.example.core.CommandRegistry;
-import org.example.core.CommandResolver;
-import org.example.core.interfaces.Command;
-import org.example.core.middleware.PipelineMiddleware;
-import org.example.core.records.ResolvedCommand;
-import org.example.core.parser.ArgsParser;
 import org.example.middleware.ParserMiddleware;
 import org.example.middleware.ResolverMiddleware;
+import org.example.presentation.cli.commands.Hello;
+import org.example.presentation.cli.core.CommandRegistry;
+import org.example.presentation.cli.core.CommandResolver;
+import org.example.presentation.cli.core.interfaces.Command;
+import org.example.presentation.cli.core.middleware.PipelineMiddleware;
+import org.example.presentation.cli.core.parser.ArgsParser;
+import org.example.presentation.cli.core.records.ResolvedCommand;
 
 import java.util.Arrays;
 
