@@ -6,7 +6,7 @@ import org.example.core.interfaces.Command;
 public class UpdateCategory implements Command {
     // TODO Make listAll subcommand
     public String name() {
-        return "";
+        return "update";
     }
 
     public String info() {
