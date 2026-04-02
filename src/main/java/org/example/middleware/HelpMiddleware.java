@@ -15,6 +15,12 @@ public class HelpMiddleware extends MiddlewareBase {
         if(!data.command().isLeaf() && data.args().length == 0){
             System.out.println(data.command().info());
             return;
+        } else if (!data.command().isLeaf()
+                && data.args().length > 0
+                && !data.args()[0].startsWith("--")) {
+            System.out.println("Unknown subcommand: " + data.args()[0]);
+            System.out.println(data.command().info());
+            return;
         }
 
         next.handle(ctx);
