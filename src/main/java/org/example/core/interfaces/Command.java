@@ -21,7 +21,7 @@ public interface Command {
 
     default void specArgs(CommandContext context) {
 
-    };
+    }
 
     void execute(CommandContext context);
 }
