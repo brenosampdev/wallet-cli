@@ -1,10 +1,8 @@
-package org.example.core.middleware;
+package org.example.middleware;
 
 import org.example.core.CommandContext;
 import org.example.core.interfaces.Command;
-import org.example.core.interfaces.Command;
-import org.example.core.CommandContext;
-import org.example.core.middleware.core.MiddlewareBase;
+import org.example.middleware.core.MiddlewareBase;
 import org.example.core.records.ResolvedCommandWithCtx;
 
 import java.util.List;
