@@ -4,7 +4,7 @@ import org.example.core.CommandContext;
 import org.example.core.interfaces.Command;
 
 public class RemoveCategory implements Command {
-    // TODO Make remove subcommmand
+    // TODO Make remove subcommand
     public String name() {
         return "rm";
     }
