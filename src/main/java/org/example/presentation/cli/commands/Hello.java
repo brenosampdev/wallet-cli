@@ -1,11 +1,13 @@
-package org.example.commands;
+package org.example.presentation.cli.commands;
 
-import org.example.core.interfaces.Command;
-import org.example.core.CommandContext;
+import org.example.presentation.cli.core.CommandContext;
+import org.example.presentation.cli.core.interfaces.Command;
+import org.example.presentation.cli.errors.CommandNotFoundException;
 
 import java.util.Map;
 
 public class Hello implements Command {
+
     private final Map<String, Command> subs;
 
     public Hello() {
@@ -30,11 +32,11 @@ public class Hello implements Command {
     }
 
     @Override
-    public void specArgs(CommandContext context) {
+    public void specArgs(CommandContext context) throws Exception{
         if(context.has("description")){
            String data = context.get("description");
            if (data == null || data.trim().isEmpty() || "true".equalsIgnoreCase(data)) {
-                throw new IllegalArgumentException("O argumento --description requer um valor (ex: --description=\"texto\")");
+                throw new CommandNotFoundException("O argumento --description requer um valor (ex: --description=\"texto\")");
             }
         }
     }

@@ -1,7 +1,7 @@
-package org.example.commands;
+package org.example.presentation.cli.commands;
 
-import org.example.core.CommandContext;
-import org.example.core.interfaces.Command;
+import org.example.presentation.cli.core.CommandContext;
+import org.example.presentation.cli.core.interfaces.Command;
 
 public class Ping implements Command {
 

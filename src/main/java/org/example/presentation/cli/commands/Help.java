@@ -1,9 +1,9 @@
-package org.example.commands;
-
-import org.example.core.interfaces.Command;
-import org.example.core.CommandContext;
+package org.example.presentation.cli.commands;
 
 import java.util.Map;
+
+import org.example.presentation.cli.core.CommandContext;
+import org.example.presentation.cli.core.interfaces.Command;
 
 public class Help implements Command {
     Map<String, Command> commands;
