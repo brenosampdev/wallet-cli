@@ -1,8 +1,8 @@
-package org.example.core.middleware;
-
-import org.example.core.middleware.core.MiddlewareBase;
+package org.example.presentation.cli.core.middleware;
 
 import java.util.*;
+
+import org.example.presentation.cli.core.middleware.core.MiddlewareBase;
 
 public class PipelineMiddleware {
     private final Queue<MiddlewareBase> queue = new LinkedList<>();

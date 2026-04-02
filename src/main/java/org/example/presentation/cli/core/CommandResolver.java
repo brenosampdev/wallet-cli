@@ -1,9 +1,9 @@
-package org.example.core;
-
-import org.example.core.interfaces.Command;
-import org.example.core.records.ResolvedCommand;
+package org.example.presentation.cli.core;
 
 import java.util.Arrays;
+
+import org.example.presentation.cli.core.interfaces.Command;
+import org.example.presentation.cli.core.records.ResolvedCommand;
 
 public class CommandResolver {
 

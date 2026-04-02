@@ -1,4 +1,4 @@
-package org.example.core;
+package org.example.presentation.cli.core;
 
 import java.util.Map;
 

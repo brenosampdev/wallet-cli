@@ -1,4 +1,4 @@
-package org.example.core.middleware.core;
+package org.example.presentation.cli.core.middleware.core;
 
 public interface Middleware {
     void handle(Object ctx);

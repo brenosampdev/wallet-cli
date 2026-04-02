@@ -1,9 +1,9 @@
-package org.example.core.middleware;
+package org.example.presentation.cli.core.middleware;
 
-import org.example.core.CommandContext;
-import org.example.core.interfaces.Command;
-import org.example.core.middleware.core.MiddlewareBase;
-import org.example.core.records.ResolvedCommandWithCtx;
+import org.example.presentation.cli.core.CommandContext;
+import org.example.presentation.cli.core.interfaces.Command;
+import org.example.presentation.cli.core.middleware.core.MiddlewareBase;
+import org.example.presentation.cli.core.records.ResolvedCommandWithCtx;
 
 public class ExecutableMiddleware extends MiddlewareBase {
 

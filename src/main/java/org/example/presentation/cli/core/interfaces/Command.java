@@ -1,8 +1,8 @@
-package org.example.core.interfaces;
-
-import org.example.core.CommandContext;
+package org.example.presentation.cli.core.interfaces;
 
 import java.util.Map;
+
+import org.example.presentation.cli.core.CommandContext;
 
 public interface Command {
     String name();
@@ -19,7 +19,7 @@ public interface Command {
         return "no documentation command";
     }
 
-    void specArgs(CommandContext context);
+    void specArgs(CommandContext context) throws Exception;
 
     void execute(CommandContext context);
 }

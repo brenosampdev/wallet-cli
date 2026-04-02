@@ -1,9 +1,9 @@
-package org.example.core;
-
-import org.example.core.interfaces.Command;
+package org.example.presentation.cli.core;
 
 import java.util.HashMap;
 import java.util.Map;
+
+import org.example.presentation.cli.core.interfaces.Command;
 
 public class CommandRegistry {
     private final Map<String , Command> commands = new HashMap<>();

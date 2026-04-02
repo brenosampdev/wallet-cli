@@ -1,7 +1,7 @@
-package org.example.core.parser;
+package org.example.presentation.cli.core.parser;
 
-import org.example.core.CommandContext;
-import org.example.errors.handlers.CommandNotFoundException;
+import org.example.presentation.cli.core.CommandContext;
+import org.example.presentation.cli.errors.CommandNotFoundException;
 
 import java.util.HashMap;
 import java.util.Map;

@@ -1,7 +1,7 @@
-package org.example.core.middleware;
+package org.example.presentation.cli.core.middleware;
 
-import org.example.core.middleware.core.MiddlewareBase;
-import org.example.errors.CommandException;
+import org.example.presentation.cli.core.middleware.core.MiddlewareBase;
+import org.example.shared.errors.CommandException;
 
 public class ExceptionMiddleware extends MiddlewareBase {
     @Override
