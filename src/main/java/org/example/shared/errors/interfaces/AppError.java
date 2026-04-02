@@ -1,4 +1,4 @@
-package org.example.errors.interfaces;
+package org.example.shared.errors.interfaces;
 
 public interface AppError {
      String code();

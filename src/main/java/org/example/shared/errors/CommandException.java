@@ -1,6 +1,6 @@
-package org.example.errors;
+package org.example.shared.errors;
 
-import org.example.errors.interfaces.AppError;
+import org.example.shared.errors.interfaces.AppError;
 
 public abstract class CommandException extends Exception implements AppError {
 
