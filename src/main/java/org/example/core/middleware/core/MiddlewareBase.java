@@ -1,4 +1,4 @@
-package org.example.core.middleware;
+package org.example.core.middleware.core;
 
 public abstract class MiddlewareBase implements Middleware {
     protected Middleware next;
