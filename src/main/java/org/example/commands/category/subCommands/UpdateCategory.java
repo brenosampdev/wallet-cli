@@ -10,7 +10,10 @@ public class UpdateCategory implements Command {
     }
 
     public String info() {
-        return "";
+        return """
+            Update a category.
+            Usage: wallet category update --name="Category 1" --title="New Title"
+            """;
     }
 
     public void execute(CommandContext context) {
