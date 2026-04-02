@@ -1,32 +1,36 @@
 package org.example.commands;
 
+import org.example.core.CommandGroup;
 import org.example.core.interfaces.Command;
 import org.example.core.CommandContext;
 
 import java.util.Map;
 
 public class Hello implements Command {
-    private final Map<String, Command> subs;
+    private final CommandGroup group;
 
     public Hello() {
-        this.subs = Map.of(
-                "ping", new Ping()
-        );
+        this.group = new CommandGroup("hello");
+        group.register(new Ping());
     }
 
     @Override
     public String name() {
-        return "hello";
+        return group.name();
     }
 
     @Override
     public Map<String, Command> subcommands() {
-        return subs;
+        return group.subcommands();
     }
 
     @Override
     public String info() {
-        return "hello test command\n args:\n hello --world teste";
+        return """
+            Command: hello
+            hello test command.
+            Usage: hello --world <value> --name <value>
+            """;
     }
 
     @Override

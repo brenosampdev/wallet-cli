@@ -17,7 +17,20 @@ public class AddCategory implements Command {
 
     @Override
     public String info() {
-        return "Add a new category";
+        return """
+            Add a new category.
+            Usage: wallet category add --title="My category" --description="My description"
+            """;
+    }
+
+    @Override
+    public void specArgs(CommandContext context) {
+        if (context.has("description")) { // --description asdasdas
+            String data = context.get("description"); // asdasdas
+             if (data == null || data.trim().isEmpty() || "true".equalsIgnoreCase(data)) {
+                throw new IllegalArgumentException("O argumento --description requer um valor (ex: --description=\"texto\")");
+            }
+        }
     }
 
     @Override
@@ -25,19 +38,8 @@ public class AddCategory implements Command {
 
         String title = context.get("title");
         String description = context.get("description");
-
-        List<String> errors = validator.validate(title, description);
-
-        if (!errors.isEmpty()) {
-            errors.forEach(System.out::println);
-            return;
-        }
-
-        System.out.println("Categoria criada com sucesso!");
-    }
-
-    @Override
-    public void specArgs(CommandContext context) {
-        // pode deixar vazio por enquanto
+        System.out.println("Successful category creation!");
+        System.out.println("Titulo da categoria: " + title);
+        System.out.println("Descricao: " + description);
     }
 }
