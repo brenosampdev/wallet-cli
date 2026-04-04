@@ -8,13 +8,14 @@ public class PipelineMiddleware {
     private final Queue<MiddlewareBase> queue = new LinkedList<>();
 
     private void setupDefault(){
+        queue.add(new ValidationMiddleware());
         queue.add(new ExecutableMiddleware());
         queue.add(new ExceptionMiddleware());
     }
 
     public PipelineMiddleware add(MiddlewareBase middleware){
         this.queue.add(middleware);
-        return this;
+        return this; 
     }
 
     public void execute(Object ctx) {

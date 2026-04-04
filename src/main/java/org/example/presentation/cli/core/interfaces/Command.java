@@ -1,5 +1,6 @@
 package org.example.presentation.cli.core.interfaces;
 
+import java.util.List;
 import java.util.Map;
 
 import org.example.presentation.cli.core.CommandContext;
@@ -19,7 +20,9 @@ public interface Command {
         return "no documentation command";
     }
 
-    void specArgs(CommandContext context) throws Exception;
+    default List<ValidationRule> specArgs(CommandContext context) {
+        return List.of();
+    }
 
     void execute(CommandContext context);
 }

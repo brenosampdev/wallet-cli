@@ -1,44 +1,36 @@
 package org.example.presentation.cli.commands;
 
 import org.example.presentation.cli.core.CommandContext;
+import org.example.presentation.cli.core.CommandGroup;
 import org.example.presentation.cli.core.interfaces.Command;
-import org.example.presentation.cli.errors.CommandNotFoundException;
 
 import java.util.Map;
 
 public class Hello implements Command {
-
-    private final Map<String, Command> subs;
+    private final CommandGroup group;
 
     public Hello() {
-        this.subs = Map.of(
-                "ping", new Ping()
-        );
+        this.group = new CommandGroup("hello");
+        group.register(new Ping());
     }
 
     @Override
     public String name() {
-        return "hello";
+        return group.name();
     }
 
     @Override
     public Map<String, Command> subcommands() {
-        return subs;
+        return group.subcommands();
     }
 
     @Override
     public String info() {
-        return "hello test command\n args:\n hello --world teste";
-    }
-
-    @Override
-    public void specArgs(CommandContext context) throws Exception{
-        if(context.has("description")){
-           String data = context.get("description");
-           if (data == null || data.trim().isEmpty() || "true".equalsIgnoreCase(data)) {
-                throw new CommandNotFoundException("O argumento --description requer um valor (ex: --description=\"texto\")");
-            }
-        }
+        return """
+            Command: hello
+            hello test command.
+            Usage: hello --world <value> --name <value>
+            """;
     }
 
     @Override
