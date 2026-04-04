@@ -34,16 +34,6 @@ public class Hello implements Command {
     }
 
     @Override
-    public void specArgs(CommandContext context) {
-        if(context.has("description")){
-           String data = context.get("description");
-           if (data == null || data.trim().isEmpty() || "true".equalsIgnoreCase(data)) {
-                throw new IllegalArgumentException("O argumento --description requer um valor (ex: --description=\"texto\")");
-            }
-        }
-    }
-
-    @Override
     public void execute(CommandContext context) {
         System.out.println("hello world" + "-" + "args: " + context.get("world"));
         System.out.println(context.get("name"));
