@@ -1,7 +1,7 @@
-package org.example.commands.category.subCommands;
+package org.example.presentation.cli.commands.category.subCommands;
 
 
-import org.example.commands.category.validation.AddCategoryValidation;
+import org.example.presentation.cli.commands.category.validation.AddCategoryValidation;
 import org.example.presentation.cli.core.CommandContext;
 import org.example.presentation.cli.core.interfaces.Command;
 import org.example.presentation.cli.core.interfaces.ValidationRule;

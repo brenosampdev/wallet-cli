@@ -1,4 +1,4 @@
-package org.example.commands.goal.validation;
+package org.example.presentation.cli.commands.goal.validation;
 
 public class MonthlyGoalValidator {
 }

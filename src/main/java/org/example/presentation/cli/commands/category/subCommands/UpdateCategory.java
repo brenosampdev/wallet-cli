@@ -1,4 +1,4 @@
-package org.example.commands.category.subCommands;
+package org.example.presentation.cli.commands.category.subCommands;
 
 import org.example.presentation.cli.core.CommandContext;
 import org.example.presentation.cli.core.interfaces.Command;

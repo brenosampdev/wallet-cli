@@ -1,4 +1,4 @@
-package org.example.commands.category.validation;
+package org.example.presentation.cli.commands.category.validation;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -1,4 +1,4 @@
-package org.example.commands.category.subCommands;
+package org.example.presentation.cli.commands.category.subCommands;
 
 
 import java.util.List;
