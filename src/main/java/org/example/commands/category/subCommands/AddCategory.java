@@ -1,15 +1,13 @@
 package org.example.commands.category.subCommands;
 
-import org.example.commands.category.validation.CategoryValidator;
+import org.example.commands.category.validation.AddCategoryValidation;
 import org.example.core.CommandContext;
 import org.example.core.interfaces.Command;
+import org.example.core.interfaces.ValidationRule;
 
 import java.util.List;
 
 public class AddCategory implements Command {
-
-    private final CategoryValidator validator = new CategoryValidator();
-
     @Override
     public String name() {
         return "add";
@@ -19,18 +17,13 @@ public class AddCategory implements Command {
     public String info() {
         return """
             Add a new category.
-            Usage: wallet category add --title="My category" --description="My description"
+            Usage: wallet category add --title "My category" --description "My description"
             """;
     }
 
     @Override
-    public void specArgs(CommandContext context) {
-        if (context.has("description")) { // --description asdasdas
-            String data = context.get("description"); // asdasdas
-             if (data == null || data.trim().isEmpty() || "true".equalsIgnoreCase(data)) {
-                throw new IllegalArgumentException("O argumento --description requer um valor (ex: --description=\"texto\")");
-            }
-        }
+    public List<ValidationRule> specArgs(CommandContext context) {
+        return List.of(AddCategoryValidation.INSTANCE);           
     }
 
     @Override
