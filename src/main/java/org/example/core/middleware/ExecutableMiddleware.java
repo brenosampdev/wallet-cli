@@ -18,7 +18,6 @@ public class ExecutableMiddleware extends MiddlewareBase {
             CommandContext commandContext = ((ResolvedCommandWithCtx) ctx).ctx();
             Command command = ((ResolvedCommandWithCtx) ctx).command();
 
-            command.specArgs(commandContext);
             command.execute(commandContext);
         }catch (Exception error){
             next.handle(error);

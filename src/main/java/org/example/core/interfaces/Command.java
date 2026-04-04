@@ -2,6 +2,7 @@ package org.example.core.interfaces;
 
 import org.example.core.CommandContext;
 
+import java.util.List;
 import java.util.Map;
 
 public interface Command {
@@ -19,8 +20,8 @@ public interface Command {
         return "no documentation command";
     }
 
-    default void specArgs(CommandContext context) {
-
+    default List<ValidationRule> specArgs(CommandContext context) {
+        return List.of();
     }
 
     void execute(CommandContext context);
