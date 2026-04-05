@@ -3,7 +3,8 @@ package org.example.infrastructure;
 import java.nio.file.Path;
 
 public enum StorageCollection {
-     TRANSACTIONS("transactions/data.json"),
+    TRANSACTIONS("transactions/data.json"),
+    USER("user/data.json"),
     GOALS("goals/data.json"),
     CATEGORIES("categories/data.json");
 
