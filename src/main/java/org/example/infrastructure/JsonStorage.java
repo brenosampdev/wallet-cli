@@ -1,13 +1,24 @@
 package org.example.infrastructure;
 
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.JsonDeserializationContext;
+import com.google.gson.JsonDeserializer;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonParseException;
+import com.google.gson.JsonPrimitive;
+import com.google.gson.JsonSerializationContext;
+import com.google.gson.JsonSerializer;
 
 import java.io.IOException;
 import java.lang.reflect.Type;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.StandardOpenOption;
+import java.time.Instant;
 import java.util.Optional;
+
+import org.example.shared.adapter.GsonInstantAdapter;
 
 public class JsonStorage {
   private final Gson gson;
@@ -16,7 +27,10 @@ public class JsonStorage {
   private final Path defaultPath = Path.of(System.getProperty("user.home"), ".wallet"); 
 
   private JsonStorage() {
-    this.gson = new Gson();
+    this.gson = new GsonBuilder()
+        .registerTypeAdapter(Instant.class, GsonInstantAdapter.instantSerializer)
+        .registerTypeAdapter(Instant.class, GsonInstantAdapter.instantDeserializer)
+        .create();
   }
 
   public static synchronized JsonStorage getInstance(){
@@ -38,10 +52,6 @@ public class JsonStorage {
 
   public <T> Optional<T> read(StorageCollection collection, Type type) throws IOException {
     return read(collection.relativePath(), type);
-  }
-
-  public void write(StorageCollection collection, Object value) throws IOException {
-    write(collection.relativePath(), value);
   }
 
   public <T> Optional<T> read(Path path, Class<T> clazz) throws IOException {
@@ -70,6 +80,10 @@ public class JsonStorage {
     }
 
     return Optional.ofNullable(gson.fromJson(jsonContent, type));
+  }
+
+  public void write(StorageCollection collection, Object value) throws IOException {
+    write(collection.relativePath(), value);
   }
 
   public void write(Path path, Object value) throws IOException {
