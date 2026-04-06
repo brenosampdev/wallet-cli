@@ -5,6 +5,7 @@ public record TransactionInputDto(
     String amount,
     String dateTime,
     String description,
-    String installments
+    String installments,
+    String categoryName
 ) {
 }

@@ -13,7 +13,8 @@ public final class TransactionMapper {
         dto.amount(),
         dto.dateTime(),
         dto.description(),
-        dto.installments()
+        dto.installments(),
+        dto.categoryId()
     );
   }
 
@@ -24,7 +25,8 @@ public final class TransactionMapper {
         entity.getAmount(),
         entity.getDateTime(),
         entity.getDescription(),
-        entity.getInstallments()
+        entity.getInstallments(),
+        entity.getCategoryId()
     );
   }
 }

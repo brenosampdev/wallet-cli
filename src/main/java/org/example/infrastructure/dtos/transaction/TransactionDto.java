@@ -12,7 +12,8 @@ public record TransactionDto(
   BigDecimal amount,
   Instant dateTime,
   String description,
-  Integer installments
+  Integer installments,
+  UUID categoryId
 ){
   public TransactionDto {
     id = (id == null) ? UUID.randomUUID() : id;

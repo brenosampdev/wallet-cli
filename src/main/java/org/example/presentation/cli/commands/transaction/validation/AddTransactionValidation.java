@@ -27,7 +27,7 @@ public class AddTransactionValidation implements ValidationRule {
 
     String dateTime = ctx.get("dateTime");
     if (dateTime == null || dateTime.trim().isEmpty() || "true".equalsIgnoreCase(dateTime)) {
-      messages.add("O argumento --dateTime requer um valor (ex: --dateTime 2026-04-04T10:00:00Z)");
+      messages.add("O argumento --dateTime requer um valor (ex: --dateTime '2026-04-04 10:00:00')");
     }
 
     if (ctx.has("description")) {
@@ -51,6 +51,11 @@ public class AddTransactionValidation implements ValidationRule {
           messages.add("Se informado, --installments deve ser um número inteiro (ex: 1, 2, 3)");
         }
       }
+    }
+
+    String category = ctx.get("category");
+    if(category == null || category.trim().isEmpty() || "true".equalsIgnoreCase(category)){
+      messages.add("O argumento --category requer um valor (ex: --category [CATEGORIA EXISTENTE])");
     }
 
     return messages;

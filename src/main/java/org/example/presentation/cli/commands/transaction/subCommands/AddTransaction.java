@@ -47,7 +47,8 @@ public class AddTransaction implements Command {
 			context.get("amount"),
 			context.get("dateTime"),
 			context.get("description"),
-			context.get("installments")
+			context.get("installments"),
+			context.get("category")
 		);
 
 		TransactionCreateDto dto = TransactionInputMapper.toCreateDto(input);
@@ -60,6 +61,7 @@ public class AddTransaction implements Command {
 		System.out.println("Data/Hora: " + dto.dateTime());
 		System.out.println("Descricao: " + dto.description());
 		System.out.println("Parcelas: " + dto.installments());
+		System.out.println("Categoria: " + dto.categoryName());
 	}
-
+	
 }

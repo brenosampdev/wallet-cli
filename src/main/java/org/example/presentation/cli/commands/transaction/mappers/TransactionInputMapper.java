@@ -20,7 +20,8 @@ public final class TransactionInputMapper {
         parseAmount(input.amount()),
         parseDateTime(input.dateTime()),
         input.description(),
-        parseInstallments(input.installments())
+        parseInstallments(input.installments()),
+        input.categoryName()
     );
   }
 
