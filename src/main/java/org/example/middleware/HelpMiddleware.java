@@ -1,7 +1,7 @@
 package org.example.middleware;
 
-import org.example.core.middleware.core.MiddlewareBase;
-import org.example.core.records.ResolvedCommand;
+import org.example.presentation.cli.core.middleware.core.MiddlewareBase;
+import org.example.presentation.cli.core.records.ResolvedCommand;
 
 public class HelpMiddleware extends MiddlewareBase {
 

@@ -1,9 +1,8 @@
 package org.example.middleware;
 
-import org.example.core.CommandResolver;
-import org.example.core.interfaces.Command;
-import org.example.core.middleware.core.MiddlewareBase;
-import org.example.core.records.ResolvedCommand;
+import org.example.presentation.cli.core.CommandResolver;
+import org.example.presentation.cli.core.middleware.core.MiddlewareBase;
+import org.example.presentation.cli.core.records.ResolvedCommand;
 
 public class ResolverMiddleware extends MiddlewareBase {
     private final CommandResolver resolver;

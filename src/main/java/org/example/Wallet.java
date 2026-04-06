@@ -1,34 +1,61 @@
 package org.example;
 
 
-import org.example.commands.Hello;
-import org.example.commands.category.subCommands.*;
-import org.example.core.CommandGroup;
-import org.example.core.CommandRegistry;
-import org.example.core.CommandResolver;
-import org.example.core.interfaces.Command;
-import org.example.core.middleware.PipelineMiddleware;
-import org.example.core.records.ResolvedCommand;
-import org.example.core.parser.ArgsParser;
+import org.example.presentation.cli.commands.category.subCommands.*;
+import org.example.presentation.cli.commands.transaction.subCommands.AddTransaction;
+import org.example.presentation.cli.core.CommandGroup;
+import org.example.presentation.cli.core.CommandRegistry;
+import org.example.presentation.cli.core.CommandResolver;
+import org.example.presentation.cli.core.interfaces.Command;
+import org.example.presentation.cli.core.middleware.PipelineMiddleware;
+import org.example.presentation.cli.core.records.ResolvedCommand;
+import org.example.presentation.cli.core.parser.ArgsParser;
+import org.example.application.services.CategoryService;
+import org.example.application.services.TransactionService;
 import org.example.middleware.HelpMiddleware;
 import org.example.middleware.ParserMiddleware;
 import org.example.middleware.ResolverMiddleware;
+import org.example.presentation.cli.commands.Hello;
 
 import java.util.Arrays;
 
 public class Wallet {
+
+    public static boolean isEmptyCommand(String args[]){
+        return args.length == 0 || args[0].trim().isEmpty();
+    }
+
+    public static void messageUnknownCommand(String commandName, CommandRegistry registry){
+        System.out.println("Unknown command: \"" + commandName + "\"\n");
+        messageEmptyCommand(registry);
+    }
+
+    public static void messageEmptyCommand(CommandRegistry registry){
+        System.out.println("=".repeat(50));
+        System.out.println("  WALLET Available Commands");
+        System.out.println("=".repeat(50) + "\n");
+        registry.getAllCommands().forEach((_name, cmd) -> {
+            System.out.println(cmd.info());
+            System.out.println("-".repeat(50) + "\n");
+        });
+    }
     public static void main(String[] args) {
+        App app = App.getInstance();
         CommandRegistry registry = new CommandRegistry();
 
+        app.init();
+        TransactionService transactionService = app.makeTransactionService();
+        CategoryService categoryService = app.makeCategoryService();
+
         CommandGroup category = new CommandGroup("category");
-        category.register(new AddCategory());
-        category.register(new ListAllCategory());
-        category.register(new RemoveCategory());
-        category.register(new UpdateCategory());
-        category.register(new ListByNameCategory());
+        category.register(new AddCategory(categoryService));
+        category.register(new ListAllCategory(categoryService));
+        category.register(new RemoveCategory(categoryService));
+        category.register(new UpdateCategory(categoryService));
+        category.register(new ListByNameCategory(categoryService));
 
         CommandGroup transaction = new CommandGroup("transaction");
-        // TODO make crud transaction
+        transaction.register(new AddTransaction(transactionService));
 
         CommandGroup goal = new CommandGroup("goal");
         // TODO make crud goal
@@ -38,17 +65,10 @@ public class Wallet {
         registry.register(goal);
         registry.register(new Hello());
 
-        //TODO: definir o helper
-        if (args.length == 0 || args[0].trim().isEmpty()) {
-            System.out.println("=".repeat(50));
-            System.out.println("  WALLET Available Commands");
-            System.out.println("=".repeat(50) + "\n");
-            registry.getAllCommands().forEach((_name, cmd) -> {
-                System.out.println(cmd.info());
-                System.out.println("-".repeat(50) + "\n");
-            });
+        if(isEmptyCommand(args)){
+            messageEmptyCommand(registry);
             return;
-        }
+        };
 
         String commandName = args[0];
         String[] commandsArgs = Arrays.copyOfRange(args, 1, args.length);
@@ -56,10 +76,7 @@ public class Wallet {
         Command command = registry.get(commandName);
 
         if (command == null) {
-            System.out.println("Unknown command: \"" + commandName + "\"\n");
-            System.out.println("Available commands:\n");
-            registry.getAllCommands().forEach((_name, cmd) ->
-                    System.out.println(cmd.info()));
+            messageUnknownCommand(commandName, registry);
             return;
         }
 
@@ -68,10 +85,10 @@ public class Wallet {
         ArgsParser parser = new ArgsParser();
 
         pipeline
-                .add(new ResolverMiddleware(resolver))
-                .add(new HelpMiddleware())
-                .add(new ParserMiddleware(parser));
-
+        .add(new ResolverMiddleware(resolver))
+        .add(new HelpMiddleware())
+        .add(new ParserMiddleware(parser));
+        
         ResolvedCommand ctx = new ResolvedCommand(command, commandsArgs);
         pipeline.execute(ctx);
     }
