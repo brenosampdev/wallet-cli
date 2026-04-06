@@ -20,10 +20,12 @@ public class AddCategoryValidation implements ValidationRule{
             messages.add("O argumento --title requer um valor (ex: --title \"Minha categoria\")");
         }
 
+      if (ctx.has("description")) {
         String description = ctx.get("description");
         if (description == null || description.trim().isEmpty() || "true".equalsIgnoreCase(description)) {
-            messages.add("O argumento --description requer um valor (ex: --description \"texto\")");
+          messages.add("Se informado, --description deve receber um texto válido (ex: --description \"texto\")");
         }
+      }
 
     return messages;
   }

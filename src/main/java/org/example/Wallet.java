@@ -10,6 +10,7 @@ import org.example.presentation.cli.core.interfaces.Command;
 import org.example.presentation.cli.core.middleware.PipelineMiddleware;
 import org.example.presentation.cli.core.records.ResolvedCommand;
 import org.example.presentation.cli.core.parser.ArgsParser;
+import org.example.application.services.CategoryService;
 import org.example.application.services.TransactionService;
 import org.example.middleware.HelpMiddleware;
 import org.example.middleware.ParserMiddleware;
@@ -44,13 +45,14 @@ public class Wallet {
 
         app.init();
         TransactionService transactionService = app.makeTransactionService();
+        CategoryService categoryService = app.makeCategoryService();
 
         CommandGroup category = new CommandGroup("category");
-        category.register(new AddCategory());
-        category.register(new ListAllCategory());
-        category.register(new RemoveCategory());
-        category.register(new UpdateCategory());
-        category.register(new ListByNameCategory());
+        category.register(new AddCategory(categoryService));
+        category.register(new ListAllCategory(categoryService));
+        category.register(new RemoveCategory(categoryService));
+        category.register(new UpdateCategory(categoryService));
+        category.register(new ListByNameCategory(categoryService));
 
         CommandGroup transaction = new CommandGroup("transaction");
         transaction.register(new AddTransaction(transactionService));

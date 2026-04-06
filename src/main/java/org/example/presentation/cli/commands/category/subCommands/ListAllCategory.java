@@ -3,11 +3,18 @@ package org.example.presentation.cli.commands.category.subCommands;
 
 import java.util.List;
 
+import org.example.application.services.CategoryService;
+import org.example.domain.entities.CategoryEntity;
 import org.example.presentation.cli.core.CommandContext;
 import org.example.presentation.cli.core.interfaces.Command;
 
 public class ListAllCategory implements Command {
-    // TODO Make listAll subcommand
+    private final CategoryService service;
+
+    public ListAllCategory(CategoryService service) {
+        this.service = service;
+    }
+
     public String name() {
         return "listAll";
     }
@@ -26,19 +33,18 @@ public class ListAllCategory implements Command {
     }
 
     public void execute(CommandContext context) {
-        // TODO alterar para pegar as categorias do banco de dados
-        List<String> categories = List.of(
-                "Title: Category 1\nDescription: Description of category 1",
-                "Title: Category 2\nDescription: Description of category 2"
-        );
+        List<CategoryEntity> categories = service.findAll();
 
         if (categories.isEmpty()) {
             System.out.println("No categories found.");
+            return;
         }
 
         System.out.println("Categories:\n");
-        for (String category : categories) {
-            System.out.println(category + "\n");
+        for (CategoryEntity category : categories) {
+            System.out.println("Title: " + category.getTitle());
+            System.out.println("Description: " + category.getDescription());
+            System.out.println();
         }
     }
 }
