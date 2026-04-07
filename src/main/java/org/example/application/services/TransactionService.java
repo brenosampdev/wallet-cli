@@ -2,8 +2,6 @@ package org.example.application.services;
 
 import java.util.List;
 import java.math.BigDecimal;
-import java.util.List;
-import java.util.Optional;
 import java.util.UUID;
 
 import org.example.application.dtos.transaction.TransactionCreateDto;
@@ -13,22 +11,12 @@ import org.example.domain.entities.CategoryEntity;
 import org.example.domain.entities.GoalEntity;
 import org.example.domain.entities.TransactionEntity;
 import org.example.domain.entities.UserEntity;
-import org.example.domain.enums.transactions.TransactionType;
 import org.example.domain.repositories.ICategoryRepository;
 import org.example.domain.repositories.IGoalRepository;
 import org.example.domain.repositories.ITransactionRepository;
 import org.example.domain.repositories.IUserRepository;
 
 public class TransactionService {
-  private final ITransactionRepository txRepository;
-  private final IUserRepository userRepository;
-  private final ICategoryRepository categoryRepository;
-
-  public TransactionService(
-    ITransactionRepository txRepository,
-    IUserRepository userRepository,
-    ICategoryRepository categoryRepository
-  ) {
   private ITransactionRepository txRepository;
   private IUserRepository userRepository;
   private ICategoryRepository categoryRepository;
@@ -113,7 +101,7 @@ public class TransactionService {
       TransactionEntity current = findById(dto.id());
 
       UUID categoryId;
-      if (!dto.categoryName().isEmpty()) {
+      if (dto.categoryName() != null && !dto.categoryName().isEmpty()) {
         CategoryEntity category = categoryRepository.findByName(dto.categoryName())
           .orElseThrow(() -> new RuntimeException("categoria não encontrada"));
         categoryId = category.getId();
@@ -126,35 +114,18 @@ public class TransactionService {
         dto.type() != null ? dto.type() : current.getType(),
         dto.amount() != null ? dto.amount() : current.getAmount(),
         dto.dateTime() != null ? dto.dateTime() : current.getDateTime(),
-        !dto.description().isEmpty() ? dto.description() : current.getDescription(),
+        dto.description() != null && !dto.description().isEmpty() ? dto.description() : current.getDescription(),
         dto.installments() != null ? dto.installments() : current.getInstallments(),
         categoryId
       );
+
       txRepository.update(updated);
       return updated;
-      UUID categoryId = category.get().getId();
-      TransactionEntity tx = new TransactionEntity(
-              dto.type(),
-              dto.amount(),
-              dto.dateTime(),
-              dto.description(),
-              dto.installments(),
-              categoryId
-      );
-
-      user.get().applyTransaction(tx);
-      userRepository.insert(user.get());
-      txRepository.insert(tx);
-
-      if (tx.getType() == TransactionType.OUTPUT) {
-        applyTransactionToGoals(tx.getAmount());
-      }
 
     } catch (Exception e) {
       throw new RuntimeException(e);
     }
   }
-}
 
   private void applyTransactionToGoals(BigDecimal amount) {
     try {
