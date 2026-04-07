@@ -2,7 +2,7 @@ package org.example;
 
 
 import org.example.presentation.cli.commands.category.subCommands.*;
-import org.example.presentation.cli.commands.transaction.subCommands.AddTransaction;
+import org.example.presentation.cli.commands.transaction.subCommands.*;
 import org.example.presentation.cli.core.CommandGroup;
 import org.example.presentation.cli.core.CommandRegistry;
 import org.example.presentation.cli.core.CommandResolver;
@@ -56,6 +56,10 @@ public class Wallet {
 
         CommandGroup transaction = new CommandGroup("transaction");
         transaction.register(new AddTransaction(transactionService));
+        transaction.register(new ListAllTransaction(transactionService));
+        transaction.register(new ListByIdTransaction(transactionService));
+        transaction.register(new RemoveTransaction(transactionService));
+        transaction.register(new UpdateTransaction(transactionService));
 
         CommandGroup goal = new CommandGroup("goal");
         // TODO make crud goal
