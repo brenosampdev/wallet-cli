@@ -2,6 +2,7 @@ package org.example;
 
 
 import org.example.presentation.cli.commands.category.subCommands.*;
+import org.example.presentation.cli.commands.transaction.subCommands.*;
 import org.example.presentation.cli.commands.goal.subCommands.AddMonthlyGoal;
 import org.example.presentation.cli.commands.goal.subCommands.ListAllMonthlyGoal;
 import org.example.presentation.cli.commands.transaction.subCommands.AddTransaction;
@@ -61,6 +62,10 @@ public class Wallet {
 
         CommandGroup transaction = new CommandGroup("transaction");
         transaction.register(new AddTransaction(transactionService));
+        transaction.register(new ListAllTransaction(transactionService));
+        transaction.register(new ListByIdTransaction(transactionService));
+        transaction.register(new RemoveTransaction(transactionService));
+        transaction.register(new UpdateTransaction(transactionService));
 
         CommandGroup goal = new CommandGroup("goal");
         goal.register(new AddMonthlyGoal(goalService));

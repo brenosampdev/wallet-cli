@@ -53,7 +53,7 @@ public class AddTransaction implements Command {
 
 		TransactionCreateDto dto = TransactionInputMapper.toCreateDto(input);
 
-		this.service.insert(dto);
+		this.service.create(dto);
 
 		System.out.println("Successful transaction creation!");
 		System.out.println("Tipo: " + dto.type());

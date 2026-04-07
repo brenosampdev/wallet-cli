@@ -25,11 +25,6 @@ public class AddTransactionValidation implements ValidationRule {
       messages.add("O argumento --amount requer um valor (ex: --amount 10.50)");
     }
 
-    String dateTime = ctx.get("dateTime");
-    if (dateTime == null || dateTime.trim().isEmpty() || "true".equalsIgnoreCase(dateTime)) {
-      messages.add("O argumento --dateTime requer um valor (ex: --dateTime '2026-04-04 10:00:00')");
-    }
-
     if (ctx.has("description")) {
       String description = ctx.get("description");
       if (description == null || description.trim().isEmpty() || "true".equalsIgnoreCase(description)) {
