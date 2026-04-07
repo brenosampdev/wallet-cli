@@ -3,6 +3,9 @@ package org.example;
 
 import org.example.presentation.cli.commands.category.subCommands.*;
 import org.example.presentation.cli.commands.transaction.subCommands.*;
+import org.example.presentation.cli.commands.goal.subCommands.AddMonthlyGoal;
+import org.example.presentation.cli.commands.goal.subCommands.ListAllMonthlyGoal;
+import org.example.presentation.cli.commands.transaction.subCommands.AddTransaction;
 import org.example.presentation.cli.core.CommandGroup;
 import org.example.presentation.cli.core.CommandRegistry;
 import org.example.presentation.cli.core.CommandResolver;
@@ -11,6 +14,7 @@ import org.example.presentation.cli.core.middleware.PipelineMiddleware;
 import org.example.presentation.cli.core.records.ResolvedCommand;
 import org.example.presentation.cli.core.parser.ArgsParser;
 import org.example.application.services.CategoryService;
+import org.example.application.services.GoalService;
 import org.example.application.services.TransactionService;
 import org.example.middleware.HelpMiddleware;
 import org.example.middleware.ParserMiddleware;
@@ -39,6 +43,7 @@ public class Wallet {
             System.out.println("-".repeat(50) + "\n");
         });
     }
+
     public static void main(String[] args) {
         App app = App.getInstance();
         CommandRegistry registry = new CommandRegistry();
@@ -46,6 +51,7 @@ public class Wallet {
         app.init();
         TransactionService transactionService = app.makeTransactionService();
         CategoryService categoryService = app.makeCategoryService();
+        GoalService goalService = app.makeGoalService();
 
         CommandGroup category = new CommandGroup("category");
         category.register(new AddCategory(categoryService));
@@ -62,7 +68,8 @@ public class Wallet {
         transaction.register(new UpdateTransaction(transactionService));
 
         CommandGroup goal = new CommandGroup("goal");
-        // TODO make crud goal
+        goal.register(new AddMonthlyGoal(goalService));
+        goal.register(new ListAllMonthlyGoal(goalService));
 
         registry.register(category);
         registry.register(transaction);
@@ -89,10 +96,10 @@ public class Wallet {
         ArgsParser parser = new ArgsParser();
 
         pipeline
-        .add(new ResolverMiddleware(resolver))
-        .add(new HelpMiddleware())
-        .add(new ParserMiddleware(parser));
-        
+                .add(new ResolverMiddleware(resolver))
+                .add(new HelpMiddleware())
+                .add(new ParserMiddleware(parser));
+
         ResolvedCommand ctx = new ResolvedCommand(command, commandsArgs);
         pipeline.execute(ctx);
     }
