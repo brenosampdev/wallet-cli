@@ -223,3 +223,27 @@ Essa separação ajuda a manter cada parte do sistema responsável por uma taref
 - **CLI Architecture**
 - **Design Patterns (GOF)**
 - **Princípios GRASP**
+
+# Contribuidores
+
+Projeto desenvolvido por:
+
+```
+NICOLAS CASTRO RIBEIRO
+JOÃO VICTOR RODRIGUES BARRETO
+BRENO SAMPAIO GONÇALVES
+```
+
+---
+
+# Objetivo do Projeto
+
+Este projeto foi desenvolvido com o objetivo de **praticar conceitos importantes de desenvolvimento de software**, como:
+
+- Organização de arquitetura
+- Separação de responsabilidades
+- Boas práticas de programação em Java
+- Estruturação de aplicações CLI
+- Aplicação de padrões de projeto
+
+Ele serve como um **exemplo educacional de aplicação backend modular em Java**.
